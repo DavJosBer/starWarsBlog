@@ -1,10 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -16,27 +13,29 @@ const Layout = () => {
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 
+	const fetchUrl = "https://www.swapi.tech/api/planets/1";
+	useEffect(() => {
+		async function Planets() {
+			let result = await fetch(fetchUrl, {
+				method: "GET"
+			})
+				.then(res => res.json())
+				.then(data => console.log(data))
+				.catch(err => console.log(err));
+			console.log(result);
+		}
+		Planets();
+	}, []);
 	return (
-		<div className="d-flex flex-column">
+		<div className="d-flex flex-column bg-dark">
 			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
-					</Switch>
-					<Footer />
-				</ScrollToTop>
+				<Navbar />
+				<Switch>
+					<Route exact path="/">
+						<Home />
+					</Route>
+				</Switch>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);
