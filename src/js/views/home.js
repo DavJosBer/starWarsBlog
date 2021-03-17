@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { CardCharacter } from "../component/cardCharacter";
 import { CardPlanet } from "../component/cardPlanet";
 
 export const Home = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<>
 			<div className="container">
@@ -12,37 +14,11 @@ export const Home = () => {
 						Characters
 					</h1>
 				</div>
+
 				<div className="row flex-nowrap py-2" style={{ overflowX: "auto" }}>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardCharacter />
-					</div>
+					{store.characters.map((item, index) => (
+						<CardCharacter key={index} id={index} character={item} />
+					))}
 				</div>
 
 				<div className="mt-4 py-3">
@@ -50,37 +26,11 @@ export const Home = () => {
 						Planets
 					</h1>
 				</div>
+
 				<div className="row flex-nowrap py-2" style={{ overflowX: "auto" }}>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
-					<div className="col-4" style={{ display: "inline-block", float: "none" }}>
-						<CardPlanet />
-					</div>
+					{store.planets.map((item, index) => (
+						<CardPlanet key={index} id={index} planet={item} />
+					))}
 				</div>
 			</div>
 		</>
