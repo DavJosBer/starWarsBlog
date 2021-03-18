@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
+import { Context } from "../store/appContext";
 
 export const CardCharacter = props => {
+	const { store, actions } = useContext(Context);
 	return (
 		<>
 			<div className="col-4" style={{ display: "inline-block", float: "none" }}>
@@ -22,7 +24,9 @@ export const CardCharacter = props => {
 							<Link to={`/characters/${props.id}`}>
 								<button className="btn btn-info">Learn More!</button>
 							</Link>
-							<button className="btn btn-warning">
+							<button
+								className="btn btn-warning"
+								onClick={() => actions.addFavorites(event, props.character.name)}>
 								<i className="far fa-heart text-white" />
 							</button>
 						</div>

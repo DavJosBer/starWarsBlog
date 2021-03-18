@@ -23,6 +23,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ ...setStore, planets: data.results });
 					})
 					.catch(err => console.log(err));
+			},
+			addFavorites: (event, name) => {
+				/*getStore().characters.map(item => {
+					if (item.name === name) {
+						setStore({ ...getStore(), favorites: { name } });
+					}
+                });*/
+				setStore({ ...getStore(), favorites: [...getStore().favorites, { name }] });
+			},
+			deleteFavorites: name => {
+				const updateFav = getStore().favorites.filter(item => {
+					return item.name != name;
+				});
+				setStore({ favorites: updateFav });
 			}
 		}
 	};

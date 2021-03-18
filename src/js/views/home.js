@@ -6,6 +6,7 @@ import { CardPlanet } from "../component/cardPlanet";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	console.log(store.favorites);
 	return (
 		<>
 			<div className="container">
